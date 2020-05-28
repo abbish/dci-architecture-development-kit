@@ -1,1 +1,1 @@
-# DCI Modeling Development Kit (DCI MDK)
+# DCI Architecture Development Kit (DCI ADK)
