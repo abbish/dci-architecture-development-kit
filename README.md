@@ -1,1 +1,1 @@
-# congenial-lamp
+#DCI Modeling Development Kit (DCI MDK)
