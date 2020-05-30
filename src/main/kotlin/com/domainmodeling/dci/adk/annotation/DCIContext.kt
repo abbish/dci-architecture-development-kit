@@ -1,5 +1,3 @@
 package com.domainmodeling.dci.adk.annotation
 
-@Target(AnnotationTarget.CLASS)
-annotation class DCIContext {
-}
+annotation class DCIContext;
