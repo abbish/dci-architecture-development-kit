@@ -1,2 +1,4 @@
 rootProject.name = 'dci-architecture-development-kit'
+include 'dci-adk-core'
+include 'dci-adk-sample'
 
