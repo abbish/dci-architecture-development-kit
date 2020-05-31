@@ -11,7 +11,7 @@ public class AccountTransferer extends AbstractDCIRole<Account> {
         super(data);
     }
 
-    public ImmutableAccountLedger income(BigDecimal amount) {
+    public AccountLedger income(BigDecimal amount) {
         return ImmutableAccountLedger.builder()
                 .account(ImmutableAccount.copyOf(data())
                         .withBalance(data().balance().add(amount)))
@@ -20,7 +20,7 @@ public class AccountTransferer extends AbstractDCIRole<Account> {
                 .build();
     }
 
-    public ImmutableAccountLedger outcome(BigDecimal amount) {
+    public AccountLedger outcome(BigDecimal amount) {
         return ImmutableAccountLedger.builder()
                 .account(ImmutableAccount.copyOf(data())
                         .withBalance(data().balance().subtract(amount)))
