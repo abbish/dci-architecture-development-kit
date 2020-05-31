@@ -1,7 +1,7 @@
-package com.domainmodeling.dci.adk.sample.moneytransfer
+package com.domainmodeling.dci.adk.sample.kotlin.moneytransfer
 
-import com.domainmodeling.dci.adk.sample.moneytransfer.Account
-import com.domainmodeling.dci.adk.sample.moneytransfer.MoneyTransfer
+import com.domainmodeling.dci.adk.sample.kotlin.moneytransfer.Account
+import com.domainmodeling.dci.adk.sample.kotlin.moneytransfer.MoneyTransfer
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import java.math.BigDecimal
@@ -12,8 +12,8 @@ class MoneyTransferTest {
     fun `test transfer`(): Unit {
 
         val ledgers = MoneyTransfer(
-            "abbish",
-            "grace"
+                "abbish",
+                "grace"
         )
             .transfer(BigDecimal(10));
 

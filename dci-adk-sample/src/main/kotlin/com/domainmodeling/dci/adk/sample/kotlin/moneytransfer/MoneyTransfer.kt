@@ -1,18 +1,18 @@
-package com.domainmodeling.dci.adk.sample.moneytransfer
+package com.domainmodeling.dci.adk.sample.kotlin.moneytransfer
 
 import java.math.BigDecimal
 
 class MoneyTransfer(private val fromAccount: String, private val toAccount: String) :
-    Transferer {
+        AccountTransferer {
     fun transfer(transferAmount: BigDecimal): Array<AccountLedger> {
 
         val from = Account(
-            BigDecimal(100.00),
-            fromAccount
+                BigDecimal(100.00),
+                fromAccount
         );
         val to = Account(
-            BigDecimal(100.00),
-            toAccount
+                BigDecimal(100.00),
+                toAccount
         );
 
         val ledgers: Array<AccountLedger> = arrayOf(

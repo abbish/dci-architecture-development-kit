@@ -1,4 +1,4 @@
-package com.domainmodeling.dci.adk.sample.moneytransfer
+package com.domainmodeling.dci.adk.sample.kotlin.moneytransfer
 
 import java.math.BigDecimal
 
