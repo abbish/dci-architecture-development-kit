@@ -15,12 +15,15 @@ public class MoneyTransferTest {
         List<AccountLedger> ledgers = new MoneyTransfer("abbish", "grace").transfer(BigDecimal.valueOf(10));
 
         assertEquals(2, ledgers.size());
-        assertEquals("abbish", ledgers.get(0).getAccount().getName());
-        assertEquals(BigDecimal.ZERO, ledgers.get(0).getIncome());
-        assertEquals(BigDecimal.valueOf(90), ledgers.get(0).getAccount().getBalance());
+        assertEquals("abbish", ledgers.get(0).account().name());
+        assertEquals(BigDecimal.valueOf(100), ledgers.get(0).originalBalance());
+        assertEquals(BigDecimal.valueOf(10), ledgers.get(0).outcome());
+        assertEquals(BigDecimal.valueOf(90), ledgers.get(0).account().balance());
 
-        assertEquals("grace", ledgers.get(1).getAccount().getName());
-        assertEquals(BigDecimal.valueOf(10), ledgers.get(1).getIncome());
-        assertEquals(BigDecimal.valueOf(110), ledgers.get(1).getAccount().getBalance());
+        assertEquals("grace", ledgers.get(1).account().name());
+        assertEquals(BigDecimal.valueOf(100), ledgers.get(1).originalBalance());
+        assertEquals(BigDecimal.valueOf(10), ledgers.get(1).income());
+        assertEquals(BigDecimal.valueOf(110), ledgers.get(1).account().balance());
+
     }
 }

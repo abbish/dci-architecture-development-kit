@@ -1,26 +1,27 @@
 package com.domainmodeling.dci.adk.sample.java.moneytransfer;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
+import org.immutables.value.Value;
 
 import java.math.BigDecimal;
 import java.time.Instant;
 
-@Getter
-public class AccountLedger {
-    private Account account;
-    private BigDecimal originalBalance;
-    private BigDecimal income;
-    private BigDecimal outcome;
-    private Instant creationTime;
+@Value.Immutable
+interface AccountLedger {
+     Account account();
+     BigDecimal originalBalance();
 
-    public AccountLedger(Account account, BigDecimal originalBalance, BigDecimal income, BigDecimal outcome) {
-        this.account = account;
-        this.originalBalance = originalBalance;
-        this.income = income;
-        this.outcome = outcome;
-        this.creationTime = Instant.now();
-    }
+     @Value.Default
+     default BigDecimal income() {
+          return BigDecimal.ZERO;
+     };
+
+     @Value.Default
+     default BigDecimal outcome() {
+          return BigDecimal.ZERO;
+     }
+
+     @Value.Default
+     default Instant creationTime() {
+          return Instant.now();
+     }
 }

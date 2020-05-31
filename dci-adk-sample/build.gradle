@@ -9,6 +9,8 @@ version = '1.0'
 dependencies {
     compile project(':dci-adk-core')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    implementation 'org.immutables:value:2.8.2'
+    annotationProcessor('org.immutables:value:2.8.2')
 }
 
 compileKotlin {
