@@ -10,6 +10,7 @@ class MoneyTransfer(private val fromAccount: String, private val toAccount: Stri
                 BigDecimal(100.00),
                 fromAccount
         );
+
         val to = Account(
                 BigDecimal(100.00),
                 toAccount

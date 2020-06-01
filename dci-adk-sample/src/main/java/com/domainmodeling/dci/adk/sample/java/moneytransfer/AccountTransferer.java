@@ -4,9 +4,9 @@ import adk.role.AbstractDCIRole;
 
 import java.math.BigDecimal;
 
-public class AccountTransferer extends AbstractDCIRole<Account> {
+public class AccountTransferer extends AbstractDCIRole<ImmutableAccount> {
 
-    public AccountTransferer(Account data) {
+    public AccountTransferer(ImmutableAccount data) {
         super(data);
     }
 
