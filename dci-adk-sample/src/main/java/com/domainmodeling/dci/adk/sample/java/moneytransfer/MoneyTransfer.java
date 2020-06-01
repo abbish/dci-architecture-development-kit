@@ -15,17 +15,17 @@ public class MoneyTransfer implements DCIContext {
 
     public List<AccountLedger> transfer(BigDecimal amount) {
 
-        AccountTransferer fromAccount = new AccountTransferer(
-                ImmutableAccount.builder()
-                        .balance(BigDecimal.valueOf(100))
-                        .name(from)
-                        .build());
+        AccountTransferer fromAccount = ImmutableAccount.builder()
+                .balance(BigDecimal.valueOf(100))
+                .name(from)
+                .build()
+                .play(AccountTransferer.class);
 
-        AccountTransferer toAccount = new AccountTransferer(
-                ImmutableAccount.builder()
-                        .balance(BigDecimal.valueOf(100))
-                        .name(to)
-                        .build());
+        AccountTransferer toAccount = ImmutableAccount.builder()
+                .balance(BigDecimal.valueOf(100))
+                .name(to)
+                .build()
+                .play(AccountTransferer.class);
 
         List<AccountLedger> ledgers = Arrays.asList(
                 fromAccount.outcome(BigDecimal.valueOf(10)),
