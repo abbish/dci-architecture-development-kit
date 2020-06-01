@@ -10,7 +10,6 @@ final public class DCIRoleFactory {
        try {
            Constructor<R> constructor = roleClass.getConstructor(data.getClass());
            return (R) constructor.newInstance(data);
-
        }
        catch (NoSuchMethodException e) {
            throw new DCIRoleInstanceBuildException(
