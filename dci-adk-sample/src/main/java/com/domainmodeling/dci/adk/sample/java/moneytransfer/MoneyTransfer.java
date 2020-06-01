@@ -1,6 +1,7 @@
 package com.domainmodeling.dci.adk.sample.java.moneytransfer;
 
 import adk.context.DCIContext;
+import adk.exception.BuildRoleInstanceFailed;
 import lombok.AllArgsConstructor;
 
 import java.math.BigDecimal;
@@ -13,7 +14,7 @@ public class MoneyTransfer implements DCIContext {
     private String from;
     private String to;
 
-    public List<AccountLedger> transfer(BigDecimal amount) {
+    public List<AccountLedger> transfer(BigDecimal amount) throws BuildRoleInstanceFailed {
 
         AccountTransferer fromAccount = ImmutableAccount.builder()
                 .balance(BigDecimal.valueOf(100))

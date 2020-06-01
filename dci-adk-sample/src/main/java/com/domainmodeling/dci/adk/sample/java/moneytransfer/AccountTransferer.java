@@ -7,7 +7,7 @@ import java.time.Instant;
 
 public class AccountTransferer extends AbstractDCIRole<Account> {
 
-    protected AccountTransferer(Account data) {
+    public AccountTransferer(Account data) {
         super(data);
     }
 

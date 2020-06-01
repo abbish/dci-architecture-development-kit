@@ -1,23 +1,19 @@
 package adk.data;
 
+import adk.exception.BuildRoleInstanceFailed;
+import adk.role.AbstractDCIRole;
 import adk.role.DCIRole;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 public interface DCIData {
-    default public <R extends DCIRole> R play(Class<R> roleClass) {
+    default public <R extends DCIRole> R play(Class<R> roleClass) throws BuildRoleInstanceFailed {
         try {
-            return roleClass.getConstructor(DCIData.class).newInstance(this);
-        } catch (NoSuchMethodException e) {
-            return null;
-        } catch (IllegalAccessException e) {
-            return null;
-        } catch (InvocationTargetException e) {
-            return null;
-        } catch (InstantiationException e) {
-            return null;
+            Constructor<R> constructor = (Constructor<R>) roleClass.getConstructors()[0];
+            return constructor.newInstance(this);
         } catch (Exception e) {
-            return null;
+            throw new BuildRoleInstanceFailed(e.getMessage());
         }
     }
 }
