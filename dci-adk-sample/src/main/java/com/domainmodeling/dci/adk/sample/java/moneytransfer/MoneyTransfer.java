@@ -1,7 +1,7 @@
 package com.domainmodeling.dci.adk.sample.java.moneytransfer;
 
 import adk.context.DCIContext;
-import adk.exception.BuildRoleInstanceFailed;
+import adk.exception.DCIRoleInstanceBuildException;
 import lombok.AllArgsConstructor;
 
 import java.math.BigDecimal;
@@ -11,30 +11,26 @@ import java.util.List;
 @AllArgsConstructor
 public class MoneyTransfer implements DCIContext {
 
-    private String from;
-    private String to;
+    private final String from;
+    private final String to;
 
-    public List<AccountLedger> transfer(BigDecimal amount) throws BuildRoleInstanceFailed {
+    public List<AccountLedger> transfer(BigDecimal amount) throws DCIRoleInstanceBuildException {
 
-        AccountTransferer fromAccount = ImmutableAccount.builder()
+        Account fromAccount = ImmutableAccount.builder()
                 .balance(BigDecimal.valueOf(100))
                 .name(from)
-                .build()
-                .play(AccountTransferer.class);
+                .build();
 
-        AccountTransferer toAccount = ImmutableAccount.builder()
+        Account toAccount = ImmutableAccount.builder()
                 .balance(BigDecimal.valueOf(100))
                 .name(to)
-                .build()
-                .play(AccountTransferer.class);
+                .build();
 
         List<AccountLedger> ledgers = Arrays.asList(
-                fromAccount.outcome(BigDecimal.valueOf(10)),
-                toAccount.income(BigDecimal.valueOf(10))
+                fromAccount.play(AccountTransferer.class).outcome(BigDecimal.valueOf(10)),
+                toAccount.play(AccountTransferer.class).income(BigDecimal.valueOf(10))
         );
 
         return ledgers;
-
     }
-
 }

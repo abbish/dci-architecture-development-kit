@@ -3,7 +3,6 @@ package com.domainmodeling.dci.adk.sample.java.moneytransfer;
 import adk.role.AbstractDCIRole;
 
 import java.math.BigDecimal;
-import java.time.Instant;
 
 public class AccountTransferer extends AbstractDCIRole<Account> {
 

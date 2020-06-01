@@ -1,6 +1,6 @@
 package com.domainmodeling.dci.adk.sample.java.moneytransfer;
 
-import adk.exception.BuildRoleInstanceFailed;
+import adk.exception.DCIRoleInstanceBuildException;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 public class MoneyTransferTest {
 
     @Test
-    public void testTransfer() throws BuildRoleInstanceFailed {
+    public void testTransfer() throws DCIRoleInstanceBuildException {
 
         List<AccountLedger> ledgers = new MoneyTransfer("abbish", "grace").transfer(BigDecimal.valueOf(10));
 
