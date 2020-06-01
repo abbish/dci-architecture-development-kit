@@ -6,21 +6,20 @@ import adk.exception.DCIRoleInstanceBuildException;
 import java.lang.reflect.Constructor;
 
 final public class DCIRoleFactory {
-    static public <R extends DCIRole> R build(Class<R> roleClass, DCIData data) throws DCIRoleInstanceBuildException {
+    static public <R extends DCIRole, D extends DCIData> R build(Class<R> roleClass, D data) throws DCIRoleInstanceBuildException {
        try {
-           Constructor<?>[] constructors = roleClass.getConstructors();
+           Constructor constructor = roleClass.getConstructor(data.getClass());
+           return (R) constructor.newInstance(data);
 
-           if(constructors.length != 1) {
-               throw new DCIRoleInstanceBuildException(String.format("Role class %s only one constructor allowed", roleClass.getName()));
-           }
-
-           Constructor<R> constructor = (Constructor<R>) roleClass.getConstructors()[0];
-
-           return constructor.newInstance(data);
-
-       } catch (Exception e) {
+       }
+       catch (NoSuchMethodException e) {
            throw new DCIRoleInstanceBuildException(
-                   String.format("Build role class %s instance was failed, reason: %s", roleClass.getName(), e.getMessage())
+                   String.format("No matched constructor found in role class %s, the role %s declared DCIData type should be %s", roleClass.getName(), roleClass.getSimpleName(), data.getClass().getName())
+           );
+       }
+       catch (Exception e) {
+           throw new DCIRoleInstanceBuildException(
+                   String.format("Build role class %s instance was failed, the reason is: %s", roleClass.getName(), e.getMessage())
            );
        }
     }

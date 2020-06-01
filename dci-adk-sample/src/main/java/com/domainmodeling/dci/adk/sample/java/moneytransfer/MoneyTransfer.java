@@ -27,8 +27,8 @@ public class MoneyTransfer implements DCIContext {
                 .build();
 
         List<AccountLedger> ledgers = Arrays.asList(
-                fromAccount.play(AccountTransferer.class).outcome(BigDecimal.valueOf(10)),
-                toAccount.play(AccountTransferer.class).income(BigDecimal.valueOf(10))
+                fromAccount.play(AccountTransferer.class).outcome(amount),
+                toAccount.play(AccountTransferer.class).income(amount)
         );
 
         return ledgers;
