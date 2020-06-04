@@ -1,6 +1,6 @@
 package com.domainmodeling.dci.adk.sample.java.moneytransfer;
 
-import adk.exception.DCIRoleInstanceBuildException;
+import com.domainmodeling.dci.adk.core.exception.DCIRoleInstanceBuildException;
 import org.junit.Test;
 
 import java.math.BigDecimal;

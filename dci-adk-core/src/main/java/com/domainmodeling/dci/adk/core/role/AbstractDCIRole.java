@@ -1,6 +1,6 @@
-package adk.role;
+package com.domainmodeling.dci.adk.core.role;
 
-import adk.data.DCIData;
+import com.domainmodeling.dci.adk.core.data.DCIData;
 
 public abstract class AbstractDCIRole<D extends DCIData> implements DCIRole<D> {
     final private D data;

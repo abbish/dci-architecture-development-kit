@@ -1,7 +1,7 @@
-package adk.role;
+package com.domainmodeling.dci.adk.core.role;
 
-import adk.data.DCIData;
-import adk.exception.DCIRoleInstanceBuildException;
+import com.domainmodeling.dci.adk.core.data.DCIData;
+import com.domainmodeling.dci.adk.core.exception.DCIRoleInstanceBuildException;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -14,7 +14,7 @@ public class DCIRoleFactoryTest {
     @Test
     public void shouldThrowExceptionWhenDataTypeNotMatchedWithRoleDeclared() throws DCIRoleInstanceBuildException {
         exceptionRule.expect(DCIRoleInstanceBuildException.class);
-        exceptionRule.expectMessage("No matched constructor found in role class adk.role.DCIRoleFactoryTest$TestRole, the role TestRole declared DCIData type should be adk.role.DCIRoleFactoryTest$Bar");
+        exceptionRule.expectMessage("No matched constructor found in role class TestRole, the role TestRole declared DCIData type should be Bar");
 
         DCIRoleFactory.build(TestRole.class, new Bar());
     }

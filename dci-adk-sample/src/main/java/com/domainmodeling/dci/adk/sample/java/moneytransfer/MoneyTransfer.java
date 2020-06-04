@@ -1,7 +1,7 @@
 package com.domainmodeling.dci.adk.sample.java.moneytransfer;
 
-import adk.context.DCIContext;
-import adk.exception.DCIRoleInstanceBuildException;
+import com.domainmodeling.dci.adk.core.context.DCIContext;
+import com.domainmodeling.dci.adk.core.exception.DCIRoleInstanceBuildException;
 import lombok.AllArgsConstructor;
 
 import java.math.BigDecimal;

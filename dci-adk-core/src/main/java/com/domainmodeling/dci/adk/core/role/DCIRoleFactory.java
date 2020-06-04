@@ -1,7 +1,7 @@
-package adk.role;
+package com.domainmodeling.dci.adk.core.role;
 
-import adk.data.DCIData;
-import adk.exception.DCIRoleInstanceBuildException;
+import com.domainmodeling.dci.adk.core.data.DCIData;
+import com.domainmodeling.dci.adk.core.exception.DCIRoleInstanceBuildException;
 
 import java.lang.reflect.Constructor;
 
@@ -13,12 +13,12 @@ final public class DCIRoleFactory {
        }
        catch (NoSuchMethodException e) {
            throw new DCIRoleInstanceBuildException(
-                   String.format("No matched constructor found in role class %s, the role %s declared DCIData type should be %s", roleClass.getName(), roleClass.getSimpleName(), data.getClass().getName())
+                   String.format("No matched constructor found in role class %s, the role %s declared DCIData type should be %s", roleClass.getSimpleName(), roleClass.getSimpleName(), data.getClass().getSimpleName())
            );
        }
        catch (Exception e) {
            throw new DCIRoleInstanceBuildException(
-                   String.format("Build role class %s instance was failed, the reason is: %s", roleClass.getName(), e.getMessage())
+                   String.format("Build role class %s instance was failed, the reason is: %s", roleClass.getSimpleName(), e.getMessage())
            );
        }
     }

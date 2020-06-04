@@ -1,6 +1,6 @@
 package com.domainmodeling.dci.adk.sample.java.moneytransfer;
 
-import adk.data.DCIData;
+import com.domainmodeling.dci.adk.core.data.DCIData;
 import org.immutables.value.Value;
 
 import java.math.BigDecimal;

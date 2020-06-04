@@ -1,4 +1,5 @@
 rootProject.name = 'dci-architecture-development-kit'
 include 'dci-adk-core'
 include 'dci-adk-sample'
+include 'dci-adk-spring-boot-starter'
 

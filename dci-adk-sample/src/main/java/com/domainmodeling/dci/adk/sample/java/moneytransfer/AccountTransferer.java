@@ -1,6 +1,6 @@
 package com.domainmodeling.dci.adk.sample.java.moneytransfer;
 
-import adk.role.AbstractDCIRole;
+import com.domainmodeling.dci.adk.core.role.AbstractDCIRole;
 
 import java.math.BigDecimal;
 
