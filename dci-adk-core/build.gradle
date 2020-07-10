@@ -1,6 +1,53 @@
 plugins {
     id 'java'
+    id 'maven-publish'
+}
+java {
+    withSourcesJar()
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 group 'com.domainmodeling.dci'
-version = '1.0'
+version = '0.0.2'
+
+publishing {
+    publications {
+        adkCore(MavenPublication) {
+            artifactId = 'dci-adk-core'
+            from components.java
+            pom {
+                name = 'DCI Architecture Development Kit Core'
+                url = 'http://github.com/abbish/dci-architecture-development-kit'
+                developers {
+                    developer {
+                        id = 'abbish'
+                        name = 'ZhiTong Zhao'
+                        email = 'me@abbish.com'
+                    }
+                }
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'https://opensource.org/licenses/MIT'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git://github.com/abbish/dci-architecture-development-kit'
+                    developerConnection = 'scm:git:ssh://github.com/abbish/dci-architecture-development-kit'
+                    url = 'http://www.domainmodeling.com/dci-adk'
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            name = 'GitHubPackages'
+            url = 'https://maven.pkg.github.com/abbish/dci-architecture-development-kit'
+            credentials {
+                username = "$System.env.GITHUB_USERNAME"
+                password = "$System.env.GITHUB_TOKEN"
+            }
+        }
+    }
+}
