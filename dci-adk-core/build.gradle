@@ -17,7 +17,8 @@ publishing {
             artifactId = 'dci-adk-core'
             from components.java
             pom {
-                name = 'DCI Architecture Development Kit Core'
+                name = 'DCI Architecture Development Kit'
+                project = 'DCI Architecture Development Kit'
                 url = 'http://github.com/abbish/dci-architecture-development-kit'
                 developers {
                     developer {
