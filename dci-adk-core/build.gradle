@@ -9,7 +9,7 @@ java {
 }
 
 group 'com.domainmodeling.dci'
-version = '0.0.2'
+version = '0.0.3'
 
 publishing {
     publications {
@@ -17,8 +17,7 @@ publishing {
             artifactId = 'dci-adk-core'
             from components.java
             pom {
-                name = 'DCI Architecture Development Kit'
-                project = 'DCI Architecture Development Kit'
+                name = 'DCI Architecture Development Kit Core'
                 url = 'http://github.com/abbish/dci-architecture-development-kit'
                 developers {
                     developer {
