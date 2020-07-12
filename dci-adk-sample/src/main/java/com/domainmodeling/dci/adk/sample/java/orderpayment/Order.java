@@ -1,6 +1,6 @@
 package com.domainmodeling.dci.adk.sample.java.orderpayment;
 
-import com.domainmodeling.dci.adk.businessorientedmodel.AbstractContract;
+import com.domainmodeling.dci.adk.businessorientedmodel.contract.AbstractContract;
 import lombok.Builder;
 import lombok.Data;
 

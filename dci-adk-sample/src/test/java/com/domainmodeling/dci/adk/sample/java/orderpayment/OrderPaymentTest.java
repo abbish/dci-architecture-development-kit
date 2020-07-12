@@ -1,10 +1,11 @@
 package com.domainmodeling.dci.adk.sample.java.orderpayment;
 
 import com.domainmodeling.dci.adk.core.exception.DCIRoleInstanceBuildException;
-import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.PaymentEvidenceType;
 import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.PaymentFulfillment;
-import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.command.ConfirmationCommand;
-import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.command.RequestCommand;
+import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.command.PaymentConfirmationCommand;
+import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.command.PaymentRequestCommand;
+import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.evidence.PaymentConfirmationEvidence;
+import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.evidence.PaymentRequestEvidence;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -32,22 +33,25 @@ public class OrderPaymentTest {
                                 .build()
                 ))
                 .status(OrderStatus.CREATED)
-                .orderNo("10000001")
+                .orderNo("001")
                 .build();
 
-        order.fulfill(PaymentFulfillment.class).request(RequestCommand.builder().build());
-        assertEquals(OrderStatus.FULFILL_PAYMENT_REQUESTED, order.getStatus());
-        assertEquals(true, order.hasEvidence(PaymentEvidenceType.REQUEST_EVIDENCE.toString()));
-        assertEquals("order#10000001 payment requested",
-                order.getEvidence(PaymentEvidenceType.REQUEST_EVIDENCE.toString()).get().getContent()
+        PaymentRequestEvidence requestEvidence = order.fulfill(PaymentFulfillment.class).request(PaymentRequestCommand.builder().build());
+
+        assertEquals("order#001 payment requested",
+                requestEvidence.getContent()
         );
 
-        order.fulfill(PaymentFulfillment.class).confirm(ConfirmationCommand.builder().build());
-        assertEquals(OrderStatus.FULFILL_PAYMENT_CONFIRMED, order.getStatus());
-        assertEquals(true, order.hasEvidence(PaymentEvidenceType.CONFIRMATION_EVIDENCE.toString()));
-        assertEquals("order#10000001 payment confirmed",
-                order.getEvidence(PaymentEvidenceType.CONFIRMATION_EVIDENCE.toString()).get().getContent()
+        PaymentConfirmationEvidence confirmationEvidence = order.fulfill(PaymentFulfillment.class).confirm(requestEvidence, PaymentConfirmationCommand.builder().build());
+
+        assertEquals("order#001 payment confirmed",
+                confirmationEvidence.getContent()
         );
+
+        order.putEvidence(requestEvidence.getEvidenceName(), requestEvidence);
+        order.putEvidence(confirmationEvidence.getEvidenceName(), confirmationEvidence);
+
+        assertEquals(2, order.getEvidences().size());
 
     }
 }

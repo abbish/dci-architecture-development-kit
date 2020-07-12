@@ -1,6 +1,6 @@
 package com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.evidence;
 
-import com.domainmodeling.dci.adk.businessorientedmodel.Evidence;
+import com.domainmodeling.dci.adk.businessorientedmodel.evidence.Evidence;
 import lombok.Builder;
 import lombok.Data;
 
@@ -8,7 +8,7 @@ import java.time.Instant;
 
 @Data
 @Builder
-public class ConfirmationEvidence implements Evidence<String> {
+public class PaymentRequestEvidence implements Evidence<String> {
     private String evidenceName;
     private String evidenceId;
     private Instant createdAt;
