@@ -18,6 +18,7 @@ public class OrderPaymentTest {
     @Test
     public void shouldCreatePaymentFulfillmentEvidences() throws DCIRoleInstanceBuildException, InvocationTargetException, IllegalAccessException {
 
+        //in main order context
         Order order = Order.builder()
                 .buyer("abbish")
                 .seller("taobao")
@@ -37,6 +38,7 @@ public class OrderPaymentTest {
                 .orderNo("001")
                 .build();
 
+        //in fulfillment sub context
         PaymentRequestEvidence requestEvidence = order
                 .fulfill(PaymentFulfillment.class)
                 .request(PaymentRequestCommand.builder().build());
@@ -45,6 +47,7 @@ public class OrderPaymentTest {
                 requestEvidence.getContent()
         );
 
+        //in fulfillment sub context
         PaymentConfirmationEvidence confirmationEvidence = order.fulfill(PaymentFulfillment.class)
                 .withRequestEvidence(requestEvidence)
                 .confirm(PaymentConfirmationCommand.builder().build());
@@ -53,7 +56,7 @@ public class OrderPaymentTest {
                 confirmationEvidence.getContent()
         );
 
-        // merge evidence to order
+        // merge sub context result to main context
         order.putEvidence(requestEvidence.getEvidenceName(), requestEvidence);
         order.putEvidence(confirmationEvidence.getEvidenceName(), confirmationEvidence);
 
