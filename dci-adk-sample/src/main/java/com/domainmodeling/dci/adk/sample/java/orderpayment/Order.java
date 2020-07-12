@@ -4,6 +4,7 @@ import com.domainmodeling.dci.adk.businessorientedmodel.oo.contract.AbstractCont
 import lombok.Builder;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Data
@@ -14,4 +15,5 @@ public class Order extends AbstractContract {
     private String buyer;
     private OrderStatus status;
     private List<OrderItem> items;
+    private BigDecimal totalAmount;
 }

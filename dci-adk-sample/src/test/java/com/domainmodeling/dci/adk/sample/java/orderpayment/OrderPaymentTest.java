@@ -36,6 +36,7 @@ public class OrderPaymentTest {
                 ))
                 .status(OrderStatus.CREATED)
                 .orderNo("001")
+                .totalAmount(BigDecimal.valueOf(20))
                 .build();
 
         //in fulfillment sub context
