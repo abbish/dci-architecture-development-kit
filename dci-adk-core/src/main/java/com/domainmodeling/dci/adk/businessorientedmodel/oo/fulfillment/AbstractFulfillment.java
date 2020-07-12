@@ -8,4 +8,8 @@ public abstract class AbstractFulfillment<C extends Contract, RE extends Evidenc
     public AbstractFulfillment(C data) {
         super(data);
     }
+
+    final public RequestEvidenceConfirmation<CE, CC> withRequestEvidence(RE requestEvidence) {
+        return confirmationCommand -> this.confirm(requestEvidence, confirmationCommand);
+    }
 }
