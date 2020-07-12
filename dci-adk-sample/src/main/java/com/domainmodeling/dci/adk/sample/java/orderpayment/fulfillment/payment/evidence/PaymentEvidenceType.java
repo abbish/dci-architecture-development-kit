@@ -1,4 +1,4 @@
-package com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment;
+package com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.evidence;
 
 public enum PaymentEvidenceType {
     REQUEST_EVIDENCE("payment-request-evidence"),

@@ -1,7 +1,7 @@
 package com.domainmodeling.dci.adk.sample.java.orderpayment;
 
 import com.domainmodeling.dci.adk.core.exception.DCIRoleInstanceBuildException;
-import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.PaymentFulfillment;
+import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.PaymentFulfillment;
 import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.command.PaymentConfirmationCommand;
 import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.command.PaymentRequestCommand;
 import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.evidence.PaymentConfirmationEvidence;

@@ -1,10 +1,11 @@
-package com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment;
+package com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment;
 
 import com.domainmodeling.dci.adk.businessorientedmodel.oo.fulfillment.AbstractFulfillment;
 import com.domainmodeling.dci.adk.sample.java.orderpayment.Order;
 import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.command.PaymentConfirmationCommand;
 import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.command.PaymentRequestCommand;
 import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.evidence.PaymentConfirmationEvidence;
+import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.evidence.PaymentEvidenceType;
 import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.evidence.PaymentRequestEvidence;
 
 import java.time.Instant;
