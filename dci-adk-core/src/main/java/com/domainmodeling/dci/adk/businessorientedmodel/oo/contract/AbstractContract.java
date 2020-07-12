@@ -1,6 +1,6 @@
-package com.domainmodeling.dci.adk.businessorientedmodel.contract;
+package com.domainmodeling.dci.adk.businessorientedmodel.oo.contract;
 
-import com.domainmodeling.dci.adk.businessorientedmodel.evidence.Evidence;
+import com.domainmodeling.dci.adk.businessorientedmodel.oo.evidence.Evidence;
 
 import java.util.HashMap;
 import java.util.Map;

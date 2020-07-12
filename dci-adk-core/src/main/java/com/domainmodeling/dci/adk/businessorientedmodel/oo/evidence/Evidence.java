@@ -1,4 +1,4 @@
-package com.domainmodeling.dci.adk.businessorientedmodel.evidence;
+package com.domainmodeling.dci.adk.businessorientedmodel.oo.evidence;
 
 import com.domainmodeling.dci.adk.core.data.DCIData;
 

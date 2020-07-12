@@ -1,6 +1,6 @@
 package com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.evidence;
 
-import com.domainmodeling.dci.adk.businessorientedmodel.evidence.Evidence;
+import com.domainmodeling.dci.adk.businessorientedmodel.oo.evidence.Evidence;
 import lombok.Builder;
 import lombok.Data;
 

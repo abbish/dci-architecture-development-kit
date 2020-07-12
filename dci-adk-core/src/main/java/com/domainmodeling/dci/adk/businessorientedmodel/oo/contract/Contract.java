@@ -1,7 +1,7 @@
-package com.domainmodeling.dci.adk.businessorientedmodel.contract;
+package com.domainmodeling.dci.adk.businessorientedmodel.oo.contract;
 
-import com.domainmodeling.dci.adk.businessorientedmodel.evidence.Evidence;
-import com.domainmodeling.dci.adk.businessorientedmodel.fulfillment.Fulfillment;
+import com.domainmodeling.dci.adk.businessorientedmodel.oo.evidence.Evidence;
+import com.domainmodeling.dci.adk.businessorientedmodel.oo.fulfillment.Fulfillment;
 import com.domainmodeling.dci.adk.core.data.DCIData;
 import com.domainmodeling.dci.adk.core.exception.DCIRoleInstanceBuildException;
 

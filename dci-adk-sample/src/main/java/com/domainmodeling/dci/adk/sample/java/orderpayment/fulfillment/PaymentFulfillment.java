@@ -1,6 +1,6 @@
 package com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment;
 
-import com.domainmodeling.dci.adk.businessorientedmodel.fulfillment.AbstractFulfillment;
+import com.domainmodeling.dci.adk.businessorientedmodel.oo.fulfillment.AbstractFulfillment;
 import com.domainmodeling.dci.adk.sample.java.orderpayment.Order;
 import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.command.PaymentConfirmationCommand;
 import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.command.PaymentRequestCommand;
