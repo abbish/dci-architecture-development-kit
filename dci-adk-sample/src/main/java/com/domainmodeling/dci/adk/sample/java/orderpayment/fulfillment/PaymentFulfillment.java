@@ -34,7 +34,7 @@ public class PaymentFulfillment extends AbstractFulfillment<Order, PaymentReques
     public PaymentConfirmationEvidence confirm(PaymentRequestEvidence requestEvidence, PaymentConfirmationCommand command) {
         return PaymentConfirmationEvidence.builder()
                 .evidenceName(PaymentEvidenceType.CONFIRMATION_EVIDENCE.toString())
-                .content(String.format("order#%s payment confirmed", data().getOrderNo()))
+                .content(String.format("PRE:`%s` confirmed", requestEvidence.getContent()))
                 .createdAt(Instant.now())
                 .evidenceId(UUID.randomUUID().toString())
                 .build();

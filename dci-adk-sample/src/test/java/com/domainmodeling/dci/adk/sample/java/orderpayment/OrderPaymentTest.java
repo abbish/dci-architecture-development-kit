@@ -49,7 +49,7 @@ public class OrderPaymentTest {
                 .withRequestEvidence(requestEvidence)
                 .confirm(PaymentConfirmationCommand.builder().build());
 
-        assertEquals("order#001 payment confirmed",
+        assertEquals("PRE:`order#001 payment requested` confirmed",
                 confirmationEvidence.getContent()
         );
 
