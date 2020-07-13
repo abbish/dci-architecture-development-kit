@@ -13,7 +13,6 @@ import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.r
 import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.request.PaymentRequestEvidence;
 import org.junit.Test;
 
-import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
@@ -23,7 +22,7 @@ import static org.junit.Assert.assertEquals;
 
 public class OrderPaymentTest {
     @Test
-    public void shouldCreatePaymentFulfillmentEvidences() throws DCIRoleInstanceBuildException, InvocationTargetException, IllegalAccessException {
+    public void shouldCreatePaymentFulfillmentEvidences() throws DCIRoleInstanceBuildException {
 
 
         //in main order context
