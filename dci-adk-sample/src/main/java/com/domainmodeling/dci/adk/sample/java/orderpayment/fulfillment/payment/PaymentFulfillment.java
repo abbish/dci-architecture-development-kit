@@ -2,16 +2,14 @@ package com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment;
 
 import com.domainmodeling.dci.adk.businessorientedmodel.oo.fulfillment.AbstractFulfillment;
 import com.domainmodeling.dci.adk.sample.java.orderpayment.Order;
-import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.command.PaymentConfirmationCommand;
-import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.command.PaymentRequestCommand;
-import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.evidence.PaymentConfirmationEvidence;
 import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.evidence.PaymentEvidenceType;
-import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.evidence.PaymentRequestEvidence;
+import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.request.PaymentRequestCommand;
+import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.request.PaymentRequestEvidence;
 
 import java.time.Instant;
 import java.util.UUID;
 
-public class PaymentFulfillment extends AbstractFulfillment<Order, PaymentRequestEvidence, PaymentRequestCommand, PaymentConfirmationEvidence, PaymentConfirmationCommand> {
+public class PaymentFulfillment extends AbstractFulfillment<Order, PaymentRequestEvidence, PaymentRequestCommand> {
     public PaymentFulfillment(Order data) {
         super(data);
     }
@@ -29,15 +27,5 @@ public class PaymentFulfillment extends AbstractFulfillment<Order, PaymentReques
                 .evidenceId(UUID.randomUUID().toString())
                 .build();
 
-    }
-
-    @Override
-    public PaymentConfirmationEvidence confirm(PaymentRequestEvidence requestEvidence, PaymentConfirmationCommand command) {
-        return PaymentConfirmationEvidence.builder()
-                .evidenceName(PaymentEvidenceType.CONFIRMATION_EVIDENCE.toString())
-                .content(String.format("PRE:`%s` confirmed", requestEvidence.getContent()))
-                .createdAt(Instant.now())
-                .evidenceId(UUID.randomUUID().toString())
-                .build();
     }
 }

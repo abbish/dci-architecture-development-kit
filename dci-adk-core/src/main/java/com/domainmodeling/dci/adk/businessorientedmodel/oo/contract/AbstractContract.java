@@ -1,11 +1,13 @@
 package com.domainmodeling.dci.adk.businessorientedmodel.oo.contract;
 
 import com.domainmodeling.dci.adk.businessorientedmodel.oo.evidence.Evidence;
+import lombok.experimental.SuperBuilder;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+@SuperBuilder
 public abstract class AbstractContract implements Contract {
 
     final private Map<String, Evidence> evidences = new HashMap<>();

@@ -1,14 +1,16 @@
 package com.domainmodeling.dci.adk.sample.java.orderpayment;
 
 import com.domainmodeling.dci.adk.businessorientedmodel.oo.contract.AbstractContract;
-import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 @Data
-@Builder
+@SuperBuilder
+@EqualsAndHashCode(callSuper = true)
 public class Order extends AbstractContract {
     private String orderNo;
     private String seller;

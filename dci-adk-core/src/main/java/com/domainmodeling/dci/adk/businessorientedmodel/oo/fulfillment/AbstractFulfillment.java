@@ -4,12 +4,12 @@ import com.domainmodeling.dci.adk.businessorientedmodel.oo.contract.Contract;
 import com.domainmodeling.dci.adk.businessorientedmodel.oo.evidence.Evidence;
 import com.domainmodeling.dci.adk.core.role.AbstractDCIRole;
 
-public abstract class AbstractFulfillment<C extends Contract, RE extends Evidence, RC, CE extends Evidence, CC> extends AbstractDCIRole<C> implements Fulfillment<C, RE, RC, CE, CC> {
+public abstract class AbstractFulfillment<C extends Contract, RE extends Evidence, RC> extends AbstractDCIRole<C> implements Fulfillment<C, RE, RC> {
     public AbstractFulfillment(C data) {
         super(data);
     }
 
-    final public RequestEvidenceConfirmation<CE, CC> withRequestEvidence(RE requestEvidence) {
-        return confirmationCommand -> this.confirm(requestEvidence, confirmationCommand);
+    final public <CE extends Evidence, CC> RequestEvidenceConfirmation<CE, CC> withRequestConfirmation(RE requestEvidence, FulfillmentRequestConfirmation<C, RE, CE, CC> confirmHandler) {
+        return confirmationCommand -> confirmHandler.confirm(data(), requestEvidence, confirmationCommand);
     }
 }

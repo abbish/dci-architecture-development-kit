@@ -2,21 +2,29 @@ package com.domainmodeling.dci.adk.sample.java.orderpayment;
 
 import com.domainmodeling.dci.adk.core.exception.DCIRoleInstanceBuildException;
 import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.PaymentFulfillment;
-import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.command.PaymentConfirmationCommand;
-import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.command.PaymentRequestCommand;
-import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.evidence.PaymentConfirmationEvidence;
-import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.evidence.PaymentRequestEvidence;
+import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.command.AlipayPaymentConfirmationCommand;
+import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.command.WechatPaymentConfirmationCommand;
+import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.confirmation.AlipayPaymentConfirmation;
+import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.confirmation.WechatPaymentConfirmation;
+import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.evidence.AlipayPaymentConfirmationEvidence;
+import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.evidence.PaymentEvidenceType;
+import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.evidence.WechatPaymentConfirmationEvidence;
+import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.request.PaymentRequestCommand;
+import com.domainmodeling.dci.adk.sample.java.orderpayment.fulfillment.payment.request.PaymentRequestEvidence;
 import org.junit.Test;
 
 import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.List;
+import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
 
 public class OrderPaymentTest {
     @Test
     public void shouldCreatePaymentFulfillmentEvidences() throws DCIRoleInstanceBuildException, InvocationTargetException, IllegalAccessException {
+
 
         //in main order context
         Order order = Order.builder()
@@ -49,17 +57,42 @@ public class OrderPaymentTest {
         );
 
         //in fulfillment sub context
-        PaymentConfirmationEvidence confirmationEvidence = order.fulfill(PaymentFulfillment.class)
-                .withRequestEvidence(requestEvidence)
-                .confirm(PaymentConfirmationCommand.builder().build());
+        WechatPaymentConfirmationEvidence wechatConfirmationEvidence = order.fulfill(PaymentFulfillment.class)
+                .withRequestConfirmation(requestEvidence, new WechatPaymentConfirmation())
+                .confirm(WechatPaymentConfirmationCommand.builder().build());
 
-        assertEquals("PRE:`order#001 payment requested` confirmed",
-                confirmationEvidence.getContent()
+        assertEquals("PRE:`order#001 payment requested` confirmed by wechat",
+                wechatConfirmationEvidence.getContent()
+        );
+
+        //in fulfillment sub context
+        AlipayPaymentConfirmationEvidence alipayConfirmationEvidence = order.fulfill(PaymentFulfillment.class)
+                .withRequestConfirmation(requestEvidence, new AlipayPaymentConfirmation())
+                .confirm(AlipayPaymentConfirmationCommand.builder().build());
+
+        assertEquals("PRE:`order#001 payment requested` confirmed by alipay",
+                alipayConfirmationEvidence.getContent()
+        );
+
+        // lambda as confirmation handler
+        AlipayPaymentConfirmationEvidence lambdaConfirmationEvidence = order.fulfill(PaymentFulfillment.class)
+                .withRequestConfirmation(requestEvidence, (contract, requestEvidence1, confirmationCommand) -> AlipayPaymentConfirmationEvidence.builder()
+                        .evidenceName(PaymentEvidenceType.CONFIRMATION_EVIDENCE.toString())
+                        .content(String.format("PRE:`%s` confirmed by lambda", requestEvidence1.getContent()))
+                        .createdAt(Instant.now())
+                        .evidenceId(UUID.randomUUID().toString())
+                        .build())
+                .confirm(AlipayPaymentConfirmationCommand.builder().build());
+
+        assertEquals("PRE:`order#001 payment requested` confirmed by lambda",
+                lambdaConfirmationEvidence.getContent()
         );
 
         // merge sub context result to main context
         order.putEvidence(requestEvidence.getEvidenceName(), requestEvidence);
-        order.putEvidence(confirmationEvidence.getEvidenceName(), confirmationEvidence);
+        order.putEvidence(wechatConfirmationEvidence.getEvidenceName(), wechatConfirmationEvidence);
+        order.putEvidence(alipayConfirmationEvidence.getEvidenceName(), alipayConfirmationEvidence);
+        order.putEvidence(lambdaConfirmationEvidence.getEvidenceName(), lambdaConfirmationEvidence);
 
         assertEquals(2, order.getEvidences().size());
 
