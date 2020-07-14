@@ -1,6 +1,6 @@
 package com.domainmodeling.dci.adk.sample.java.salesorder.contract.fulfillment.payment.confirmation;
 
-import com.domainmodeling.dci.adk.businessorientedmodel.oo.fulfillment.FulfillmentRequestConfirmation;
+import com.domainmodeling.dci.adk.businessorientedmodel.oo.fulfillment.RequestConfirmationPlayer;
 import com.domainmodeling.dci.adk.sample.java.salesorder.contract.Order;
 import com.domainmodeling.dci.adk.sample.java.salesorder.contract.fulfillment.payment.command.AlipayPaymentConfirmationCommand;
 import com.domainmodeling.dci.adk.sample.java.salesorder.contract.fulfillment.payment.evidence.AlipayPaymentConfirmationEvidence;
@@ -10,7 +10,7 @@ import com.domainmodeling.dci.adk.sample.java.salesorder.contract.fulfillment.pa
 import java.time.Instant;
 import java.util.UUID;
 
-public class AlipayPaymentConfirmation implements FulfillmentRequestConfirmation<Order, PaymentRequestEvidence, AlipayPaymentConfirmationEvidence, AlipayPaymentConfirmationCommand> {
+public class AlipayPaymentConfirmationPlayer implements RequestConfirmationPlayer<Order, PaymentRequestEvidence, AlipayPaymentConfirmationEvidence, AlipayPaymentConfirmationCommand> {
     @Override
     public AlipayPaymentConfirmationEvidence confirm(Order contract, PaymentRequestEvidence requestEvidence, AlipayPaymentConfirmationCommand confirmationCommand) {
         return AlipayPaymentConfirmationEvidence.builder()

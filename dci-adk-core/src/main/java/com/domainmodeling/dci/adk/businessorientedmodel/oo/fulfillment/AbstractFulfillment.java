@@ -9,7 +9,7 @@ public abstract class AbstractFulfillment<C extends Contract, RE extends Evidenc
         super(data);
     }
 
-    final public <CE extends Evidence, CC> RequestEvidenceConfirmation<CE, CC> withRequestConfirmation(RE requestEvidence, FulfillmentRequestConfirmation<C, RE, CE, CC> confirmHandler) {
-        return confirmationCommand -> confirmHandler.confirm(data(), requestEvidence, confirmationCommand);
+    final public <RCP extends RequestConfirmationPlayer, CE extends Evidence, CC> RequestConfirmationRole<RCP, CE, CC> requestConfirmation(RE requestEvidence) {
+        return player -> (RequestEvidenceConfirmation<CE, CC>) command -> (CE) player.confirm(data(), requestEvidence, command);
     }
 }

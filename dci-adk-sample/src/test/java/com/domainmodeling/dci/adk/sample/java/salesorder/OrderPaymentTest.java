@@ -5,8 +5,8 @@ import com.domainmodeling.dci.adk.sample.java.salesorder.contract.Order;
 import com.domainmodeling.dci.adk.sample.java.salesorder.contract.fulfillment.payment.PaymentFulfillment;
 import com.domainmodeling.dci.adk.sample.java.salesorder.contract.fulfillment.payment.command.AlipayPaymentConfirmationCommand;
 import com.domainmodeling.dci.adk.sample.java.salesorder.contract.fulfillment.payment.command.WechatPaymentConfirmationCommand;
-import com.domainmodeling.dci.adk.sample.java.salesorder.contract.fulfillment.payment.confirmation.AlipayPaymentConfirmation;
-import com.domainmodeling.dci.adk.sample.java.salesorder.contract.fulfillment.payment.confirmation.WechatPaymentConfirmation;
+import com.domainmodeling.dci.adk.sample.java.salesorder.contract.fulfillment.payment.confirmation.AlipayPaymentConfirmationPlayer;
+import com.domainmodeling.dci.adk.sample.java.salesorder.contract.fulfillment.payment.confirmation.WechatPaymentConfirmationPlayer;
 import com.domainmodeling.dci.adk.sample.java.salesorder.contract.fulfillment.payment.evidence.AlipayPaymentConfirmationEvidence;
 import com.domainmodeling.dci.adk.sample.java.salesorder.contract.fulfillment.payment.evidence.PaymentEvidenceType;
 import com.domainmodeling.dci.adk.sample.java.salesorder.contract.fulfillment.payment.evidence.WechatPaymentConfirmationEvidence;
@@ -57,8 +57,9 @@ public class OrderPaymentTest {
         );
 
         //in fulfillment sub context
-        WechatPaymentConfirmationEvidence wechatConfirmationEvidence = order.fulfill(PaymentFulfillment.class)
-                .withRequestConfirmation(requestEvidence, new WechatPaymentConfirmation())
+        WechatPaymentConfirmationEvidence wechatConfirmationEvidence = (WechatPaymentConfirmationEvidence) order.fulfill(PaymentFulfillment.class)
+                .requestConfirmation(requestEvidence)
+                .withConfirmationPlayer(new WechatPaymentConfirmationPlayer())
                 .confirm(WechatPaymentConfirmationCommand.builder().build());
 
         assertEquals("PRE:`order#001 payment requested` confirmed by wechat",
@@ -66,8 +67,9 @@ public class OrderPaymentTest {
         );
 
         //in fulfillment sub context
-        AlipayPaymentConfirmationEvidence alipayConfirmationEvidence = order.fulfill(PaymentFulfillment.class)
-                .withRequestConfirmation(requestEvidence, new AlipayPaymentConfirmation())
+        AlipayPaymentConfirmationEvidence alipayConfirmationEvidence = (AlipayPaymentConfirmationEvidence) order.fulfill(PaymentFulfillment.class)
+                .requestConfirmation(requestEvidence)
+                .withConfirmationPlayer(new AlipayPaymentConfirmationPlayer())
                 .confirm(AlipayPaymentConfirmationCommand.builder().build());
 
         assertEquals("PRE:`order#001 payment requested` confirmed by alipay",
@@ -75,8 +77,9 @@ public class OrderPaymentTest {
         );
 
         // lambda as confirmation handler
-        AlipayPaymentConfirmationEvidence lambdaConfirmationEvidence = order.fulfill(PaymentFulfillment.class)
-                .withRequestConfirmation(requestEvidence, (contract, requestEvidence1, confirmationCommand) -> AlipayPaymentConfirmationEvidence.builder()
+        AlipayPaymentConfirmationEvidence lambdaConfirmationEvidence = (AlipayPaymentConfirmationEvidence) order.fulfill(PaymentFulfillment.class)
+                .requestConfirmation(requestEvidence)
+                .withConfirmationPlayer((contract, requestEvidence1, confirmationCommand) -> AlipayPaymentConfirmationEvidence.builder()
                         .evidenceName(PaymentEvidenceType.CONFIRMATION_EVIDENCE.toString())
                         .content(String.format("PRE:`%s` confirmed by lambda", requestEvidence1.getContent()))
                         .createdAt(Instant.now())

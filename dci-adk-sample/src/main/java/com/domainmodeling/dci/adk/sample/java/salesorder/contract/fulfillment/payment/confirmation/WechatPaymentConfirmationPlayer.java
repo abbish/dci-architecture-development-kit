@@ -1,6 +1,6 @@
 package com.domainmodeling.dci.adk.sample.java.salesorder.contract.fulfillment.payment.confirmation;
 
-import com.domainmodeling.dci.adk.businessorientedmodel.oo.fulfillment.FulfillmentRequestConfirmation;
+import com.domainmodeling.dci.adk.businessorientedmodel.oo.fulfillment.RequestConfirmationPlayer;
 import com.domainmodeling.dci.adk.sample.java.salesorder.contract.Order;
 import com.domainmodeling.dci.adk.sample.java.salesorder.contract.fulfillment.payment.command.WechatPaymentConfirmationCommand;
 import com.domainmodeling.dci.adk.sample.java.salesorder.contract.fulfillment.payment.evidence.PaymentEvidenceType;
@@ -10,7 +10,7 @@ import com.domainmodeling.dci.adk.sample.java.salesorder.contract.fulfillment.pa
 import java.time.Instant;
 import java.util.UUID;
 
-public class WechatPaymentConfirmation implements FulfillmentRequestConfirmation<Order, PaymentRequestEvidence, WechatPaymentConfirmationEvidence, WechatPaymentConfirmationCommand> {
+public class WechatPaymentConfirmationPlayer implements RequestConfirmationPlayer<Order, PaymentRequestEvidence, WechatPaymentConfirmationEvidence, WechatPaymentConfirmationCommand> {
     @Override
     public WechatPaymentConfirmationEvidence confirm(Order contract, PaymentRequestEvidence requestEvidence, WechatPaymentConfirmationCommand confirmationCommand) {
         return WechatPaymentConfirmationEvidence.builder()
