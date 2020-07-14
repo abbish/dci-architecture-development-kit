@@ -47,7 +47,7 @@ public class OrderPaymentTest {
         //contract
         Order order = proposal.sign(SignQuotationCommand.builder().build());
 
-        //in fulfillment sub context
+        //fulfill payment
         PaymentRequestEvidence requestEvidence = order
                 .fulfill(PaymentFulfillment.class)
                 .request(PaymentRequestCommand.builder().build());
@@ -56,7 +56,7 @@ public class OrderPaymentTest {
                 requestEvidence.getContent()
         );
 
-        //in fulfillment sub context
+        //confirm payment with wechat
         WechatPaymentConfirmationEvidence wechatConfirmationEvidence = (WechatPaymentConfirmationEvidence) order.fulfill(PaymentFulfillment.class)
                 .requestConfirmation(requestEvidence)
                 .withConfirmationPlayer(new WechatPaymentConfirmationPlayer())
@@ -66,7 +66,7 @@ public class OrderPaymentTest {
                 wechatConfirmationEvidence.getContent()
         );
 
-        //in fulfillment sub context
+        //confirm payment with alipay
         AlipayPaymentConfirmationEvidence alipayConfirmationEvidence = (AlipayPaymentConfirmationEvidence) order.fulfill(PaymentFulfillment.class)
                 .requestConfirmation(requestEvidence)
                 .withConfirmationPlayer(new AlipayPaymentConfirmationPlayer())
@@ -76,7 +76,7 @@ public class OrderPaymentTest {
                 alipayConfirmationEvidence.getContent()
         );
 
-        // lambda as confirmation handler
+        //confirm payment with lambda
         AlipayPaymentConfirmationEvidence lambdaConfirmationEvidence = (AlipayPaymentConfirmationEvidence) order.fulfill(PaymentFulfillment.class)
                 .requestConfirmation(requestEvidence)
                 .withConfirmationPlayer((contract, requestEvidence1, confirmationCommand) -> AlipayPaymentConfirmationEvidence.builder()
